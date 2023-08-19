@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: grid;
+            height: 100vh;
+            place-items: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            width: 250px;
+            height: 200px;
+            justify-content: center;
+            background-color: rgb(49, 192, 202);
+            border-radius: 10px;
+        }
+
+        .container input {
+            width: 80%;
+            height: 25px;
+            padding: 5px;
+            outline: none;
+            border: 1px solid #333;
+            border-radius: 5px;
+        }
+
+        .btn {
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn button {
+            width: 80px;
+            padding: 5px;
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid #333;
+        }
+        .btn button:hover{
+            cursor: pointer;
+            color: #eee;
+            background-color: transparent;
+            border: 1px solid #eee;
+            transition: 0.2s ease;
+        }
+        #forgot{
+            cursor: pointer;
+            color: rgb(67, 12, 12);
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <div class="container">
+            <input type="email" placeholder="Enter Your Email" id="email" required="1sds@gmail.com">
+            <input type="password" placeholder="Enter password" id="password">
+            <div class="btn">
+                <button id="sign-up">SignUp</button>
+                <button id="sign-in">SignIn</button>
+            </div>
+            <h4 id="forgot">forgot your password?</h4>
+        </div>
+        
+    </form>
+
+    <script>
+        let sign_in = document.querySelector('#sign-in');
+        let sign_up = document.querySelector('#sign-up');
+
+
+        sign_in.addEventListener('click', () => {
+
+            let email = document.querySelector('#email').value;
+            let pass = document.querySelector('#password').value;
+
+            // localStorage.setItem('userName', email);        // store email value in local storage
+            // localStorage.setItem('userPassword', pass);     // store password value in local storge
+            // alert("YOU ARE SIGN-IN SUCCESSFULLY")
+
+            if (localStorage.getItem('userName') == email) {
+                alert("YOU HAVE ALEARDY ACOUNT ");
+            }
+            else {
+                localStorage.setItem('userName', email);        // store email value in local storage
+                localStorage.setItem('userPassword', pass);     // store password value in local storge
+                alert("YOU ARE SIGN-IN SUCCESSFULLY")
+            }
+        })
+
+        sign_up.addEventListener('click', () => {
+
+            let email = document.querySelector('#email').value;
+            let pass = document.querySelector('#password').value;
+
+            sessionStorage.setItem('email', email);  // user input email is store in sessionStorage
+            sessionStorage.setItem('pass', pass);    // user input email is store in sessionStorage
+
+            let localStorageEmail = localStorage.getItem('userName'); // get email value in localStorage and store in localStorageEmail variable
+
+            let localStoragePassword = localStorage.getItem('userPassword'); // get userPassword value in localStorage and store in localStoragePassword variable
+
+            let sessionStorageEmail = sessionStorage.getItem('email'); //get email value in sessinStorage and store in sessionStorageEmail variable
+
+            let sessionStoragePassword = sessionStorage.getItem('pass'); // get password value in sessionStorage and store in sessionStoragePassword variable
+
+            //then sessionStorage data and localStorage data compare 
+            if (sessionStorageEmail == localStorageEmail && sessionStoragePassword == localStoragePassword) {
+                alert("SignUp Successfully");
+            }
+            else {
+                alert("Error");
+            }
+
+        })
+
+        // if you have forgot your password then it warking
+        document.querySelector('#forgot').addEventListener('click',()=>{
+            localStorage.clear(); // clear localStorage data
+            sessionStorage.clear(); //clear sessionStorage data
+            alert("YOU CAN SET NEW E-MAIL AND PASSWORD ")
+        })
+
+    </script>
+</body>
+
+</html>
